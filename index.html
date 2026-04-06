@@ -49,241 +49,139 @@
     text-align: center;
     box-shadow: 0 20px 60px rgba(0,0,0,0.3);
   }
-  .login-icon {
-    font-size: 48px;
-    margin-bottom: 12px;
-  }
-  .login-box h2 {
-    font-size: 22px;
-    font-weight: 700;
-    color: var(--text);
-    margin-bottom: 4px;
-  }
-  .login-box p {
-    font-size: 14px;
-    color: var(--text-light);
-    margin-bottom: 20px;
-  }
+  .login-icon { font-size: 48px; margin-bottom: 12px; }
+  .login-box h2 { font-size: 22px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+  .login-box p { font-size: 14px; color: var(--text-light); margin-bottom: 20px; }
   .login-box input {
-    width: 100%;
-    padding: 14px 16px;
-    border: 2px solid var(--border);
-    border-radius: 12px;
-    font-size: 20px;
-    text-align: center;
-    letter-spacing: 8px;
-    font-weight: 700;
-    color: var(--text);
-    background: #f9fafb;
+    width: 100%; padding: 14px 16px; border: 2px solid var(--border); border-radius: 12px;
+    font-size: 20px; text-align: center; letter-spacing: 8px; font-weight: 700;
+    color: var(--text); background: #f9fafb;
   }
-  .login-box input:focus {
-    outline: none;
-    border-color: var(--primary);
-  }
+  .login-box input:focus { outline: none; border-color: var(--primary); }
   .login-btn {
-    width: 100%;
-    padding: 14px;
-    background: var(--primary);
-    color: white;
-    border: none;
-    border-radius: 12px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    margin-top: 14px;
+    width: 100%; padding: 14px; background: var(--primary); color: white; border: none;
+    border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 14px;
   }
   .login-btn:active { background: var(--primary-dark); }
-  .login-error {
-    color: var(--red);
-    font-size: 13px;
-    margin-top: 10px;
-    display: none;
-  }
+  .login-error { color: var(--red); font-size: 13px; margin-top: 10px; display: none; }
 
-  /* ===== APP (hidden until login) ===== */
+  /* ===== APP ===== */
   .app { display: none; }
-
   .header {
     background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-    color: white;
-    padding: 20px 16px 24px;
-    text-align: center;
-    position: sticky;
-    top: 0;
-    z-index: 10;
+    color: white; padding: 20px 16px 24px; text-align: center;
+    position: sticky; top: 0; z-index: 10;
   }
   .header h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.3px; }
   .header p { font-size: 13px; opacity: 0.7; margin-top: 4px; }
   .container { padding: 16px; max-width: 500px; margin: 0 auto; }
 
   .card {
-    background: var(--card);
-    border-radius: var(--radius);
-    padding: 16px;
-    margin-bottom: 12px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    background: var(--card); border-radius: var(--radius); padding: 16px;
+    margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.06);
   }
   .card-title {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text-light);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 12px;
+    font-size: 13px; font-weight: 600; color: var(--text-light);
+    text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px;
   }
-
   .form-group { margin-bottom: 14px; }
   .form-group:last-child { margin-bottom: 0; }
-  label {
-    display: block;
-    font-size: 14px;
-    font-weight: 500;
-    margin-bottom: 6px;
-    color: var(--text);
-  }
+  label { display: block; font-size: 14px; font-weight: 500; margin-bottom: 6px; color: var(--text); }
   select, .app input {
-    width: 100%;
-    padding: 12px 14px;
-    border: 1.5px solid var(--border);
-    border-radius: 10px;
-    font-size: 16px;
-    background: white;
-    color: var(--text);
-    appearance: none;
-    -webkit-appearance: none;
+    width: 100%; padding: 12px 14px; border: 1.5px solid var(--border); border-radius: 10px;
+    font-size: 16px; background: white; color: var(--text); appearance: none; -webkit-appearance: none;
   }
   select {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236b7280' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 14px center;
-    padding-right: 36px;
+    background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px;
   }
   select:focus, .app input:focus {
-    outline: none;
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(26,115,232,0.15);
+    outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(26,115,232,0.15);
   }
 
   .toggle-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 0;
-    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 0; border-bottom: 1px solid var(--border);
   }
   .toggle-row:last-child { border-bottom: none; }
   .toggle-row span { font-size: 14px; }
   .toggle {
-    width: 48px; height: 28px;
-    background: #d1d5db;
-    border-radius: 14px;
-    position: relative;
-    cursor: pointer;
-    transition: background 0.2s;
-    flex-shrink: 0;
+    width: 48px; height: 28px; background: #d1d5db; border-radius: 14px;
+    position: relative; cursor: pointer; transition: background 0.2s; flex-shrink: 0;
   }
   .toggle.active { background: var(--primary); }
   .toggle::after {
-    content: '';
-    width: 22px; height: 22px;
-    background: white;
-    border-radius: 50%;
-    position: absolute;
-    top: 3px; left: 3px;
-    transition: transform 0.2s;
+    content: ''; width: 22px; height: 22px; background: white; border-radius: 50%;
+    position: absolute; top: 3px; left: 3px; transition: transform 0.2s;
     box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   }
   .toggle.active::after { transform: translateX(20px); }
 
   .system-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 8px 14px;
-    border-radius: 20px;
-    font-size: 14px;
-    font-weight: 600;
-    margin-top: 4px;
+    display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px;
+    border-radius: 20px; font-size: 14px; font-weight: 600; margin-top: 4px;
   }
   .system-badge.tier1 { background: #d1fae5; color: #065f46; }
   .system-badge.tier2 { background: #dbeafe; color: #1e40af; }
   .system-badge.tier3 { background: #fef3c7; color: #92400e; }
   .system-badge.tier4 { background: #fee2e2; color: #991b1b; }
 
+  /* ===== SERVICE CARDS (selectable) ===== */
   .service-card {
-    background: var(--card);
-    border-radius: var(--radius);
-    margin-bottom: 10px;
-    overflow: hidden;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    background: var(--card); border-radius: var(--radius); margin-bottom: 10px;
+    overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    cursor: pointer; transition: all 0.2s; border: 2px solid transparent;
   }
   .service-card.dimmed { display: none; }
-  .service-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 14px 16px;
-    gap: 12px;
+  .service-card.selected {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(26,115,232,0.15), 0 1px 3px rgba(0,0,0,0.06);
   }
+  .service-card:active { transform: scale(0.98); }
+  .service-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 16px; gap: 12px;
+  }
+  .service-check {
+    width: 24px; height: 24px; border-radius: 50%; border: 2px solid var(--border);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    transition: all 0.2s;
+  }
+  .service-card.selected .service-check {
+    background: var(--primary); border-color: var(--primary);
+  }
+  .service-check::after {
+    content: ''; display: none; width: 6px; height: 10px;
+    border: solid white; border-width: 0 2px 2px 0; transform: rotate(45deg);
+  }
+  .service-card.selected .service-check::after { display: block; }
   .service-name { font-size: 14px; font-weight: 500; flex: 1; }
   .service-price { font-size: 18px; font-weight: 700; color: var(--primary); white-space: nowrap; }
   .service-range { font-size: 12px; color: var(--text-light); text-align: right; }
-  .service-note {
-    padding: 0 16px 12px;
-    font-size: 12px;
-    color: var(--text-light);
-    line-height: 1.4;
+
+  .select-hint {
+    text-align: center; font-size: 13px; color: var(--text-light);
+    margin-bottom: 12px; font-style: italic;
   }
 
-  .btn-quote {
-    width: 100%;
-    padding: 16px;
-    background: var(--primary);
-    color: white;
-    border: none;
-    border-radius: 12px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    margin-top: 4px;
-    transition: background 0.2s;
-  }
-  .btn-quote:active { background: var(--primary-dark); }
-
+  /* ===== EMAIL SECTION ===== */
+  .email-section { display: none; margin-top: 16px; }
   .btn-email {
-    width: 100%;
-    padding: 16px;
-    background: var(--green);
-    color: white;
-    border: none;
-    border-radius: 12px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    margin-top: 12px;
-    transition: background 0.2s;
+    width: 100%; padding: 16px; background: var(--green); color: white; border: none;
+    border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer;
+    margin-top: 12px; transition: background 0.2s;
   }
   .btn-email:active { background: #059669; }
-
-  .email-section {
-    display: none;
-    margin-top: 16px;
-  }
+  .btn-email:disabled { background: #9ca3af; cursor: not-allowed; }
 
   .footer {
-    text-align: center;
-    padding: 20px 16px;
-    font-size: 12px;
-    color: var(--text-light);
+    text-align: center; padding: 20px 16px; font-size: 12px; color: var(--text-light);
   }
 
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #0f1117;
-      --card: #1a1d28;
-      --text: #e5e7eb;
-      --text-light: #9ca3af;
-      --border: #2d3142;
+      --bg: #0f1117; --card: #1a1d28; --text: #e5e7eb;
+      --text-light: #9ca3af; --border: #2d3142;
     }
     select, .app input { background: #1a1d28; color: #e5e7eb; border-color: var(--border); }
     .header { background: linear-gradient(135deg, #0f1117 0%, #1a1d28 100%); }
@@ -295,7 +193,7 @@
 </head>
 <body>
 
-<!-- ===== LOGIN SCREEN ===== -->
+<!-- ===== LOGIN ===== -->
 <div class="login-screen" id="loginScreen">
   <div class="login-box">
     <div class="login-icon">🔑</div>
@@ -307,7 +205,7 @@
   </div>
 </div>
 
-<!-- ===== MAIN APP ===== -->
+<!-- ===== APP ===== -->
 <div class="app" id="mainApp">
 
 <div class="header">
@@ -321,15 +219,15 @@
     <div class="card-title">Vehicle Info</div>
     <div class="form-group">
       <label>Make</label>
-      <select id="make"></select>
+      <select id="make" onchange="updateQuote()"></select>
     </div>
     <div class="form-group">
       <label>Year</label>
-      <select id="year"></select>
+      <select id="year" onchange="updateQuote()"></select>
     </div>
     <div class="form-group">
       <label>System Override</label>
-      <select id="systemOverride">
+      <select id="systemOverride" onchange="updateQuote()">
         <option value="auto">Auto (detect from make/year)</option>
         <option value="basic">Basic / Metal Key Only</option>
         <option value="transponder">Transponder (Chip Key)</option>
@@ -342,20 +240,20 @@
   <div class="card">
     <div class="card-title">Add-ons</div>
     <div class="toggle-row">
-      <span>After-hours</span>
-      <div class="toggle" id="togAfterHours" onclick="toggleBtn(this)"></div>
+      <span>After-hours (+$35)</span>
+      <div class="toggle" id="togAfterHours" onclick="toggleBtn(this);updateQuote()"></div>
     </div>
     <div class="toggle-row">
       <span>Travel Fee (+$25)</span>
-      <div class="toggle" id="togTravel" onclick="toggleBtn(this)"></div>
+      <div class="toggle" id="togTravel" onclick="toggleBtn(this);updateQuote()"></div>
     </div>
     <div class="toggle-row">
       <span>Rush Fee (+$35)</span>
-      <div class="toggle" id="togRush" onclick="toggleBtn(this)"></div>
+      <div class="toggle" id="togRush" onclick="toggleBtn(this);updateQuote()"></div>
     </div>
     <div class="toggle-row">
       <span>Referral Discount (-$10)</span>
-      <div class="toggle" id="togReferral" onclick="toggleBtn(this)"></div>
+      <div class="toggle" id="togReferral" onclick="toggleBtn(this);updateQuote()"></div>
     </div>
   </div>
 
@@ -364,9 +262,9 @@
     <div id="profileContent"></div>
   </div>
 
-  <button class="btn-quote" onclick="generateQuote()">Generate Quote</button>
-
-  <div id="results" style="margin-top: 16px;"></div>
+  <div class="card-title" style="margin-top:8px;">Select a Service</div>
+  <div class="select-hint">Tap the service you want to quote</div>
+  <div id="results"></div>
 
   <!-- EMAIL SECTION -->
   <div class="email-section" id="emailSection">
@@ -380,7 +278,7 @@
         <label>Customer Name (optional)</label>
         <input type="text" id="customerName" placeholder="John">
       </div>
-      <button class="btn-email" onclick="sendEmail()">Send Quote via Email</button>
+      <button class="btn-email" id="btnEmail" onclick="sendEmail()" disabled>Select a service above</button>
     </div>
   </div>
 
@@ -390,11 +288,11 @@
   </div>
 </div>
 
-</div><!-- /app -->
+</div>
 
 <script>
 // ===== LOGIN =====
-const ACCESS_CODE = '8585';
+const ACCESS_CODE = '0392';
 
 function tryLogin() {
   const pin = document.getElementById('pinInput').value;
@@ -411,13 +309,11 @@ function tryLogin() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-  // Auto-login if already authenticated this session
   if (sessionStorage.getItem('ckr_auth') === '1') {
     document.getElementById('loginScreen').style.display = 'none';
     document.getElementById('mainApp').style.display = 'block';
     initApp();
   }
-  // Enter key on pin input
   document.getElementById('pinInput').addEventListener('keyup', function(e) {
     if (e.key === 'Enter') tryLogin();
   });
@@ -532,15 +428,31 @@ const systemLabels = {
   smart: 'Smart / Push-Start'
 };
 
-// Store last quote for email
-let lastQuoteData = null;
+let selectedServiceIndex = -1;
+let currentServices = [];
 
-function generateQuote() {
+function selectService(idx) {
+  selectedServiceIndex = idx;
+  // Update visual selection
+  document.querySelectorAll('.service-card').forEach((card, i) => {
+    card.classList.toggle('selected', parseInt(card.dataset.idx) === idx);
+  });
+  // Enable email button
+  const btn = document.getElementById('btnEmail');
+  btn.disabled = false;
+  btn.textContent = 'Send Quote via Email';
+  document.getElementById('emailSection').style.display = 'block';
+}
+
+function updateQuote() {
   const make = document.getElementById('make').value;
   const year = document.getElementById('year').value;
+  if (!make || !year) return;
+
   const { prices, system, tier } = getPricing(make, year);
   const addons = getAddons();
 
+  // Profile
   document.getElementById('profileContent').innerHTML = `
     <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
       <span class="system-badge ${tier.cls}">${systemLabels[system]}</span>
@@ -552,7 +464,7 @@ function generateQuote() {
     </p>
   `;
 
-  const services = [
+  currentServices = [
     { name: 'Vehicle Lockout / Entry', price: prices.lockout },
     { name: 'Trunk Unlock', price: prices.trunk },
     { name: 'Spare Basic Metal Key', price: prices.spareBasic },
@@ -566,19 +478,24 @@ function generateQuote() {
     { name: 'Ignition Repair / Key Won\'t Turn', price: prices.ignition },
   ];
 
-  // Save for email
-  lastQuoteData = { make, year, system, services, addons };
+  // Check if previously selected service is still valid
+  if (selectedServiceIndex >= 0 && currentServices[selectedServiceIndex].price === null) {
+    selectedServiceIndex = -1;
+  }
 
   let html = '';
-  services.forEach(s => {
+  currentServices.forEach((s, i) => {
     const applicable = s.price !== null;
     const total = applicable ? s.price + addons : null;
     const low = applicable ? Math.round(total * 0.85) : null;
     const high = applicable ? Math.round(total * 1.15) : null;
+    const isSelected = i === selectedServiceIndex;
 
     html += `
-      <div class="service-card ${applicable ? '' : 'dimmed'}">
+      <div class="service-card ${applicable ? '' : 'dimmed'} ${isSelected ? 'selected' : ''}"
+           data-idx="${i}" onclick="selectService(${i})">
         <div class="service-row">
+          <div class="service-check"></div>
           <div class="service-name">${s.name}</div>
           <div style="text-align:right;">
             <div class="service-price">$${total}</div>
@@ -590,8 +507,12 @@ function generateQuote() {
   });
 
   document.getElementById('results').innerHTML = html;
-  document.getElementById('emailSection').style.display = 'block';
-  document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  // Update email button state
+  if (selectedServiceIndex < 0) {
+    document.getElementById('btnEmail').disabled = true;
+    document.getElementById('btnEmail').textContent = 'Select a service above';
+  }
 }
 
 // ===== EMAIL =====
@@ -601,42 +522,42 @@ function sendEmail() {
     document.getElementById('customerEmail').focus();
     return;
   }
+  if (selectedServiceIndex < 0) return;
 
   const name = document.getElementById('customerName').value.trim() || 'Valued Customer';
-  const d = lastQuoteData;
+  const make = document.getElementById('make').value;
+  const year = document.getElementById('year').value;
+  const system = getSystem(make, year);
+  const addons = getAddons();
+  const service = currentServices[selectedServiceIndex];
+  const total = service.price + addons;
+  const low = Math.round(total * 0.85);
+  const high = Math.round(total * 1.15);
   const today = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 
-  // Build service lines for email
-  let serviceLines = '';
-  d.services.forEach(s => {
-    if (s.price === null) return;
-    const total = s.price + d.addons;
-    serviceLines += `  - ${s.name}: $${total}\n`;
-  });
-
-  const subject = `Car Key Rescue - Quote for ${d.year} ${d.make}`;
+  const subject = `Car Key Rescue - Quote for ${year} ${make}`;
 
   const body = `Hi ${name},
 
-Thank you for contacting Car Key Rescue! Below is your personalized quote for your ${d.year} ${d.make}.
+Thank you for contacting Car Key Rescue! Below is your personalized quote.
 
-VEHICLE DETAILS
-  Vehicle: ${d.year} ${d.make}
-  Key System: ${systemLabels[d.system]}
-  Date: ${today}
+VEHICLE
+  ${year} ${make}
+  Key System: ${systemLabels[system]}
 
-ESTIMATED PRICING
-${serviceLines}
-${d.addons !== 0 ? `(Includes add-ons: ${d.addons > 0 ? '+' : ''}$${d.addons})\n` : ''}
-* Prices are estimates and may vary depending on vehicle condition.
+SERVICE
+  ${service.name}
+  Estimated Price: $${total}
+  Price Range: $${low} - $${high}
+${addons !== 0 ? `  (Includes add-ons: ${addons > 0 ? '+' : ''}$${addons})\n` : ''}
+* Final price may vary depending on vehicle condition.
 
-Ready to schedule? Call or text us anytime!
+Ready to schedule? Call or text us anytime.
 
 Best regards,
 Car Key Rescue
 (321) 370-6640
-Serving Central Florida
-www.carkeyrescue.com`;
+Serving Central Florida`;
 
   const mailtoLink = `mailto:${encodeURIComponent(email)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   window.location.href = mailtoLink;
@@ -661,7 +582,7 @@ function initApp() {
   }
   yearSel.value = '2020';
 
-  generateQuote();
+  updateQuote();
 }
 </script>
 </body>
