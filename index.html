@@ -29,6 +29,80 @@
     min-height: 100vh;
     padding-bottom: env(safe-area-inset-bottom, 20px);
   }
+
+  /* ===== LOGIN SCREEN ===== */
+  .login-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 24px;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  }
+  .login-box {
+    background: white;
+    border-radius: 20px;
+    padding: 32px 24px;
+    width: 100%;
+    max-width: 340px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  }
+  .login-icon {
+    font-size: 48px;
+    margin-bottom: 12px;
+  }
+  .login-box h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .login-box p {
+    font-size: 14px;
+    color: var(--text-light);
+    margin-bottom: 20px;
+  }
+  .login-box input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    font-size: 20px;
+    text-align: center;
+    letter-spacing: 8px;
+    font-weight: 700;
+    color: var(--text);
+    background: #f9fafb;
+  }
+  .login-box input:focus {
+    outline: none;
+    border-color: var(--primary);
+  }
+  .login-btn {
+    width: 100%;
+    padding: 14px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 14px;
+  }
+  .login-btn:active { background: var(--primary-dark); }
+  .login-error {
+    color: var(--red);
+    font-size: 13px;
+    margin-top: 10px;
+    display: none;
+  }
+
+  /* ===== APP (hidden until login) ===== */
+  .app { display: none; }
+
   .header {
     background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
     color: white;
@@ -38,16 +112,8 @@
     top: 0;
     z-index: 10;
   }
-  .header h1 {
-    font-size: 20px;
-    font-weight: 700;
-    letter-spacing: -0.3px;
-  }
-  .header p {
-    font-size: 13px;
-    opacity: 0.7;
-    margin-top: 4px;
-  }
+  .header h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.3px; }
+  .header p { font-size: 13px; opacity: 0.7; margin-top: 4px; }
   .container { padding: 16px; max-width: 500px; margin: 0 auto; }
 
   .card {
@@ -75,7 +141,7 @@
     margin-bottom: 6px;
     color: var(--text);
   }
-  select, input {
+  select, .app input {
     width: 100%;
     padding: 12px 14px;
     border: 1.5px solid var(--border);
@@ -92,7 +158,7 @@
     background-position: right 14px center;
     padding-right: 36px;
   }
-  select:focus, input:focus {
+  select:focus, .app input:focus {
     outline: none;
     border-color: var(--primary);
     box-shadow: 0 0 0 3px rgba(26,115,232,0.15);
@@ -151,7 +217,7 @@
     overflow: hidden;
     box-shadow: 0 1px 3px rgba(0,0,0,0.06);
   }
-  .service-card.dimmed { opacity: 0.4; }
+  .service-card.dimmed { display: none; }
   .service-row {
     display: flex;
     align-items: center;
@@ -159,32 +225,14 @@
     padding: 14px 16px;
     gap: 12px;
   }
-  .service-name {
-    font-size: 14px;
-    font-weight: 500;
-    flex: 1;
-  }
-  .service-price {
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--primary);
-    white-space: nowrap;
-  }
-  .service-range {
-    font-size: 12px;
-    color: var(--text-light);
-    text-align: right;
-  }
+  .service-name { font-size: 14px; font-weight: 500; flex: 1; }
+  .service-price { font-size: 18px; font-weight: 700; color: var(--primary); white-space: nowrap; }
+  .service-range { font-size: 12px; color: var(--text-light); text-align: right; }
   .service-note {
     padding: 0 16px 12px;
     font-size: 12px;
     color: var(--text-light);
     line-height: 1.4;
-  }
-  .na-label {
-    font-size: 13px;
-    color: var(--text-light);
-    font-style: italic;
   }
 
   .btn-quote {
@@ -202,6 +250,26 @@
   }
   .btn-quote:active { background: var(--primary-dark); }
 
+  .btn-email {
+    width: 100%;
+    padding: 16px;
+    background: var(--green);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 12px;
+    transition: background 0.2s;
+  }
+  .btn-email:active { background: #059669; }
+
+  .email-section {
+    display: none;
+    margin-top: 16px;
+  }
+
   .footer {
     text-align: center;
     padding: 20px 16px;
@@ -217,12 +285,30 @@
       --text-light: #9ca3af;
       --border: #2d3142;
     }
-    select, input { background: #1a1d28; color: #e5e7eb; border-color: var(--border); }
+    select, .app input { background: #1a1d28; color: #e5e7eb; border-color: var(--border); }
     .header { background: linear-gradient(135deg, #0f1117 0%, #1a1d28 100%); }
+    .login-box { background: #1a1d28; }
+    .login-box h2 { color: #e5e7eb; }
+    .login-box input { background: #0f1117; color: #e5e7eb; border-color: var(--border); }
   }
 </style>
 </head>
 <body>
+
+<!-- ===== LOGIN SCREEN ===== -->
+<div class="login-screen" id="loginScreen">
+  <div class="login-box">
+    <div class="login-icon">🔑</div>
+    <h2>Car Key Rescue</h2>
+    <p>Enter access code</p>
+    <input type="password" id="pinInput" maxlength="4" inputmode="numeric" placeholder="----" autocomplete="off">
+    <button class="login-btn" onclick="tryLogin()">Enter</button>
+    <div class="login-error" id="loginError">Incorrect code. Try again.</div>
+  </div>
+</div>
+
+<!-- ===== MAIN APP ===== -->
+<div class="app" id="mainApp">
 
 <div class="header">
   <h1>Car Key Rescue</h1>
@@ -231,7 +317,6 @@
 
 <div class="container">
 
-  <!-- VEHICLE INPUT -->
   <div class="card">
     <div class="card-title">Vehicle Info</div>
     <div class="form-group">
@@ -254,7 +339,6 @@
     </div>
   </div>
 
-  <!-- ADD-ONS -->
   <div class="card">
     <div class="card-title">Add-ons</div>
     <div class="toggle-row">
@@ -275,17 +359,30 @@
     </div>
   </div>
 
-  <!-- DETECTED SYSTEM -->
   <div class="card" id="profileCard">
     <div class="card-title">Vehicle Profile</div>
     <div id="profileContent"></div>
   </div>
 
-  <!-- GENERATE -->
   <button class="btn-quote" onclick="generateQuote()">Generate Quote</button>
 
-  <!-- RESULTS -->
   <div id="results" style="margin-top: 16px;"></div>
+
+  <!-- EMAIL SECTION -->
+  <div class="email-section" id="emailSection">
+    <div class="card">
+      <div class="card-title">Send Quote to Customer</div>
+      <div class="form-group">
+        <label>Customer Email</label>
+        <input type="email" id="customerEmail" placeholder="customer@email.com">
+      </div>
+      <div class="form-group">
+        <label>Customer Name (optional)</label>
+        <input type="text" id="customerName" placeholder="John">
+      </div>
+      <button class="btn-email" onclick="sendEmail()">Send Quote via Email</button>
+    </div>
+  </div>
 
   <div class="footer">
     Car Key Rescue &copy; 2026<br>
@@ -293,52 +390,68 @@
   </div>
 </div>
 
+</div><!-- /app -->
+
 <script>
+// ===== LOGIN =====
+const ACCESS_CODE = '8585';
+
+function tryLogin() {
+  const pin = document.getElementById('pinInput').value;
+  if (pin === ACCESS_CODE) {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('mainApp').style.display = 'block';
+    sessionStorage.setItem('ckr_auth', '1');
+    initApp();
+  } else {
+    document.getElementById('loginError').style.display = 'block';
+    document.getElementById('pinInput').value = '';
+    document.getElementById('pinInput').focus();
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Auto-login if already authenticated this session
+  if (sessionStorage.getItem('ckr_auth') === '1') {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('mainApp').style.display = 'block';
+    initApp();
+  }
+  // Enter key on pin input
+  document.getElementById('pinInput').addEventListener('keyup', function(e) {
+    if (e.key === 'Enter') tryLogin();
+  });
+});
+
 // ===== VEHICLE DATABASE =====
 const makes = {
-  // Domestic Mainstream
   'Chevrolet': 'domestic', 'Ford': 'domestic', 'GMC': 'domestic', 'Dodge': 'domestic',
   'Chrysler': 'domestic', 'Jeep': 'domestic', 'Ram': 'domestic', 'Buick': 'domestic',
   'Cadillac': 'domestic', 'Lincoln': 'domestic',
-  // Asian Mainstream
   'Toyota': 'asian', 'Honda': 'asian', 'Nissan': 'asian', 'Hyundai': 'asian',
   'Kia': 'asian', 'Mazda': 'asian', 'Subaru': 'asian', 'Mitsubishi': 'asian',
-  // Asian Premium
   'Lexus': 'asian_premium', 'Acura': 'asian_premium', 'Infiniti': 'asian_premium',
-  // European
   'Volkswagen': 'euro', 'BMW': 'euro_premium', 'Mercedes-Benz': 'euro_premium',
   'Audi': 'euro_premium', 'Volvo': 'euro', 'Mini': 'euro',
-  // Other
   'Tesla': 'electric', 'Other': 'domestic'
 };
 
-// Infer key system from make group + year
 function inferSystem(make, year) {
   const group = makes[make] || 'domestic';
   const y = parseInt(year);
-
   if (group === 'electric') return 'smart';
-
-  // Smart / push-start era
   if (group === 'euro_premium' && y >= 2005) return 'smart';
   if (group === 'asian_premium' && y >= 2010) return 'smart';
   if ((group === 'asian' || group === 'domestic') && y >= 2020) return 'smart';
-
-  // Remote / fob era
   if (group === 'euro_premium' && y >= 2000) return 'remote';
   if (group === 'asian_premium' && y >= 2005) return 'remote';
   if ((group === 'domestic' || group === 'asian') && y >= 2010) return 'remote';
   if (group === 'euro' && y >= 2008) return 'remote';
-
-  // Transponder era
   if (y >= 1998) return 'transponder';
-
-  // Basic
   return 'basic';
 }
 
 function getDifficultyTier(make, year) {
-  const group = makes[make] || 'domestic';
   const sys = getSystem(make, year);
   if (sys === 'basic') return { tier: 1, label: 'Tier 1 - Easy', cls: 'tier1' };
   if (sys === 'transponder') return { tier: 2, label: 'Tier 2 - Standard', cls: 'tier2' };
@@ -352,42 +465,37 @@ function getSystem(make, year) {
   return inferSystem(make, year);
 }
 
-// ===== PRICING ENGINE =====
+// ===== PRICING =====
 function getPricing(make, year) {
   const sys = getSystem(make, year);
   const group = makes[make] || 'domestic';
   const tier = getDifficultyTier(make, year);
   const isPremium = group.includes('premium') || group === 'electric';
 
-  // Base prices by system type
   const pricing = {
     basic: {
-      lockout: 65, trunk: 65,
-      spareBasic: 35,
+      lockout: 65, trunk: 65, spareBasic: 35,
       transponderProgram: null, transponderSupply: null,
       remoteProgram: null, remoteSupply: null,
       smartProgram: null, smartSupply: null,
       allKeysLost: 165, ignition: 165
     },
     transponder: {
-      lockout: 65, trunk: 65,
-      spareBasic: 35,
+      lockout: 65, trunk: 65, spareBasic: 35,
       transponderProgram: 85, transponderSupply: 125,
       remoteProgram: null, remoteSupply: null,
       smartProgram: null, smartSupply: null,
       allKeysLost: 195, ignition: 185
     },
     remote: {
-      lockout: 65, trunk: 65,
-      spareBasic: null,
+      lockout: 65, trunk: 65, spareBasic: null,
       transponderProgram: null, transponderSupply: null,
       remoteProgram: 75, remoteSupply: 175,
       smartProgram: null, smartSupply: null,
       allKeysLost: 225, ignition: 195
     },
     smart: {
-      lockout: 75, trunk: 75,
-      spareBasic: null,
+      lockout: 75, trunk: 75, spareBasic: null,
       transponderProgram: null, transponderSupply: null,
       remoteProgram: null, remoteSupply: null,
       smartProgram: 95, smartSupply: 275,
@@ -396,22 +504,12 @@ function getPricing(make, year) {
   };
 
   let p = { ...pricing[sys] };
-
-  // Premium brand markup
   if (isPremium) {
-    Object.keys(p).forEach(k => {
-      if (p[k] !== null) p[k] = Math.round(p[k] * 1.15);
-    });
+    Object.keys(p).forEach(k => { if (p[k] !== null) p[k] = Math.round(p[k] * 1.15); });
   }
-
-  // Year-based small adjustment for very new vehicles (2022+)
-  const y = parseInt(year);
-  if (y >= 2022) {
-    Object.keys(p).forEach(k => {
-      if (p[k] !== null && p[k] >= 100) p[k] += 15;
-    });
+  if (parseInt(year) >= 2022) {
+    Object.keys(p).forEach(k => { if (p[k] !== null && p[k] >= 100) p[k] += 15; });
   }
-
   return { prices: p, system: sys, tier };
 }
 
@@ -425,29 +523,7 @@ function getAddons() {
 }
 
 // ===== UI =====
-function toggleBtn(el) {
-  el.classList.toggle('active');
-}
-
-function populateMakes() {
-  const sel = document.getElementById('make');
-  Object.keys(makes).sort().forEach(m => {
-    const opt = document.createElement('option');
-    opt.value = m; opt.textContent = m;
-    sel.appendChild(opt);
-  });
-  sel.value = 'Dodge';
-}
-
-function populateYears() {
-  const sel = document.getElementById('year');
-  for (let y = 2026; y >= 1990; y--) {
-    const opt = document.createElement('option');
-    opt.value = y; opt.textContent = y;
-    sel.appendChild(opt);
-  }
-  sel.value = '2020';
-}
+function toggleBtn(el) { el.classList.toggle('active'); }
 
 const systemLabels = {
   basic: 'Basic / Metal Key',
@@ -456,13 +532,15 @@ const systemLabels = {
   smart: 'Smart / Push-Start'
 };
 
+// Store last quote for email
+let lastQuoteData = null;
+
 function generateQuote() {
   const make = document.getElementById('make').value;
   const year = document.getElementById('year').value;
   const { prices, system, tier } = getPricing(make, year);
   const addons = getAddons();
 
-  // Update profile
   document.getElementById('profileContent').innerHTML = `
     <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
       <span class="system-badge ${tier.cls}">${systemLabels[system]}</span>
@@ -474,20 +552,22 @@ function generateQuote() {
     </p>
   `;
 
-  // Build services
   const services = [
-    { name: 'Vehicle Lockout / Entry', price: prices.lockout, note: 'Standard vehicle entry service', always: true },
-    { name: 'Trunk Unlock', price: prices.trunk, note: 'Trunk-only unlock service', always: true },
-    { name: 'Spare Basic Metal Key', price: prices.spareBasic, note: 'Supply + cut a basic metal key', always: false },
-    { name: 'Program Customer Transponder', price: prices.transponderProgram, note: 'Customer already has the key', always: false },
-    { name: 'Transponder Key (supply + cut + program)', price: prices.transponderSupply, note: 'We supply the chip key', always: false },
-    { name: 'Program Customer Remote / Fob', price: prices.remoteProgram, note: 'Customer already has the remote', always: false },
-    { name: 'Remote Head Key (supply + cut + program)', price: prices.remoteSupply, note: 'We supply the remote key', always: false },
-    { name: 'Program Customer Smart Key', price: prices.smartProgram, note: 'Customer already has smart key', always: false },
-    { name: 'Smart Key (supply + program)', price: prices.smartSupply, note: 'We supply the smart key/fob', always: false },
-    { name: 'All Keys Lost', price: prices.allKeysLost, note: 'Most common quote for this vehicle', always: true },
-    { name: 'Ignition Repair / Key Won\'t Turn', price: prices.ignition, note: 'For ignition-related issues only', always: true },
+    { name: 'Vehicle Lockout / Entry', price: prices.lockout },
+    { name: 'Trunk Unlock', price: prices.trunk },
+    { name: 'Spare Basic Metal Key', price: prices.spareBasic },
+    { name: 'Program Customer Transponder', price: prices.transponderProgram },
+    { name: 'Transponder Key (supply + cut + program)', price: prices.transponderSupply },
+    { name: 'Program Customer Remote / Fob', price: prices.remoteProgram },
+    { name: 'Remote Head Key (supply + cut + program)', price: prices.remoteSupply },
+    { name: 'Program Customer Smart Key', price: prices.smartProgram },
+    { name: 'Smart Key (supply + program)', price: prices.smartSupply },
+    { name: 'All Keys Lost', price: prices.allKeysLost },
+    { name: 'Ignition Repair / Key Won\'t Turn', price: prices.ignition },
   ];
+
+  // Save for email
+  lastQuoteData = { make, year, system, services, addons };
 
   let html = '';
   services.forEach(s => {
@@ -500,27 +580,89 @@ function generateQuote() {
       <div class="service-card ${applicable ? '' : 'dimmed'}">
         <div class="service-row">
           <div class="service-name">${s.name}</div>
-          ${applicable
-            ? `<div style="text-align:right;">
-                <div class="service-price">$${total}</div>
-                <div class="service-range">$${low} - $${high}</div>
-              </div>`
-            : `<div class="na-label">N/A</div>`
-          }
+          <div style="text-align:right;">
+            <div class="service-price">$${total}</div>
+            <div class="service-range">$${low} - $${high}</div>
+          </div>
         </div>
-        <div class="service-note">${s.note}</div>
       </div>
     `;
   });
 
   document.getElementById('results').innerHTML = html;
+  document.getElementById('emailSection').style.display = 'block';
   document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-// Init
-populateMakes();
-populateYears();
-generateQuote();
+// ===== EMAIL =====
+function sendEmail() {
+  const email = document.getElementById('customerEmail').value.trim();
+  if (!email) {
+    document.getElementById('customerEmail').focus();
+    return;
+  }
+
+  const name = document.getElementById('customerName').value.trim() || 'Valued Customer';
+  const d = lastQuoteData;
+  const today = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+  // Build service lines for email
+  let serviceLines = '';
+  d.services.forEach(s => {
+    if (s.price === null) return;
+    const total = s.price + d.addons;
+    serviceLines += `  - ${s.name}: $${total}\n`;
+  });
+
+  const subject = `Car Key Rescue - Quote for ${d.year} ${d.make}`;
+
+  const body = `Hi ${name},
+
+Thank you for contacting Car Key Rescue! Below is your personalized quote for your ${d.year} ${d.make}.
+
+VEHICLE DETAILS
+  Vehicle: ${d.year} ${d.make}
+  Key System: ${systemLabels[d.system]}
+  Date: ${today}
+
+ESTIMATED PRICING
+${serviceLines}
+${d.addons !== 0 ? `(Includes add-ons: ${d.addons > 0 ? '+' : ''}$${d.addons})\n` : ''}
+* Prices are estimates and may vary depending on vehicle condition.
+
+Ready to schedule? Call or text us anytime!
+
+Best regards,
+Car Key Rescue
+(321) 370-6640
+Serving Central Florida
+www.carkeyrescue.com`;
+
+  const mailtoLink = `mailto:${encodeURIComponent(email)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  window.location.href = mailtoLink;
+}
+
+// ===== INIT =====
+function initApp() {
+  const makeSel = document.getElementById('make');
+  if (makeSel.options.length > 0) return;
+  Object.keys(makes).sort().forEach(m => {
+    const opt = document.createElement('option');
+    opt.value = m; opt.textContent = m;
+    makeSel.appendChild(opt);
+  });
+  makeSel.value = 'Dodge';
+
+  const yearSel = document.getElementById('year');
+  for (let y = 2026; y >= 1990; y--) {
+    const opt = document.createElement('option');
+    opt.value = y; opt.textContent = y;
+    yearSel.appendChild(opt);
+  }
+  yearSel.value = '2020';
+
+  generateQuote();
+}
 </script>
 </body>
 </html>
