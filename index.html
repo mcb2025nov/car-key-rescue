@@ -17,37 +17,24 @@
     --text-light: #6b7280;
     --border: #e5e7eb;
     --green: #10b981;
-    --orange: #f59e0b;
     --red: #ef4444;
     --radius: 14px;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
     font-family: -apple-system, BlinkMacSystemFont, 'SF Pro', 'Segoe UI', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
+    background: var(--bg); color: var(--text); min-height: 100vh;
     padding-bottom: env(safe-area-inset-bottom, 20px);
   }
 
-  /* ===== LOGIN SCREEN ===== */
   .login-screen {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    padding: 24px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    min-height: 100vh; padding: 24px;
     background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
   }
   .login-box {
-    background: white;
-    border-radius: 20px;
-    padding: 32px 24px;
-    width: 100%;
-    max-width: 340px;
-    text-align: center;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    background: white; border-radius: 20px; padding: 32px 24px; width: 100%;
+    max-width: 340px; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.3);
   }
   .login-icon { font-size: 48px; margin-bottom: 12px; }
   .login-box h2 { font-size: 22px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
@@ -65,7 +52,6 @@
   .login-btn:active { background: var(--primary-dark); }
   .login-error { color: var(--red); font-size: 13px; margin-top: 10px; display: none; }
 
-  /* ===== APP ===== */
   .app { display: none; }
   .header {
     background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
@@ -126,7 +112,6 @@
   .system-badge.tier3 { background: #fef3c7; color: #92400e; }
   .system-badge.tier4 { background: #fee2e2; color: #991b1b; }
 
-  /* ===== SERVICE CARDS (selectable) ===== */
   .service-card {
     background: var(--card); border-radius: var(--radius); margin-bottom: 10px;
     overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.06);
@@ -140,16 +125,14 @@
   .service-card:active { transform: scale(0.98); }
   .service-row {
     display: flex; align-items: center; justify-content: space-between;
-    padding: 14px 16px; gap: 12px;
+    padding: 14px 16px; gap: 10px;
   }
   .service-check {
     width: 24px; height: 24px; border-radius: 50%; border: 2px solid var(--border);
     display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     transition: all 0.2s;
   }
-  .service-card.selected .service-check {
-    background: var(--primary); border-color: var(--primary);
-  }
+  .service-card.selected .service-check { background: var(--primary); border-color: var(--primary); }
   .service-check::after {
     content: ''; display: none; width: 6px; height: 10px;
     border: solid white; border-width: 0 2px 2px 0; transform: rotate(45deg);
@@ -164,7 +147,6 @@
     margin-bottom: 12px; font-style: italic;
   }
 
-  /* ===== EMAIL SECTION ===== */
   .email-section { display: none; margin-top: 16px; }
   .btn-email {
     width: 100%; padding: 16px; background: var(--green); color: white; border: none;
@@ -193,7 +175,6 @@
 </head>
 <body>
 
-<!-- ===== LOGIN ===== -->
 <div class="login-screen" id="loginScreen">
   <div class="login-box">
     <div class="login-icon">🔑</div>
@@ -205,7 +186,6 @@
   </div>
 </div>
 
-<!-- ===== APP ===== -->
 <div class="app" id="mainApp">
 
 <div class="header">
@@ -228,11 +208,11 @@
     <div class="form-group">
       <label>System Override</label>
       <select id="systemOverride" onchange="updateQuote()">
-        <option value="auto">Auto (detect from make/year)</option>
-        <option value="basic">Basic / Metal Key Only</option>
-        <option value="transponder">Transponder (Chip Key)</option>
-        <option value="remote">Remote / Fob</option>
-        <option value="smart">Smart / Push-Start</option>
+        <option value="auto">Auto (detect from year)</option>
+        <option value="basic">Basic / Early Chip</option>
+        <option value="transponder">Transponder</option>
+        <option value="remote">Remote Head / Smart Mix</option>
+        <option value="smart">Smart / Push Start</option>
       </select>
     </div>
   </div>
@@ -240,7 +220,7 @@
   <div class="card">
     <div class="card-title">Add-ons</div>
     <div class="toggle-row">
-      <span>After-hours (+$35)</span>
+      <span>After-hours (+$40)</span>
       <div class="toggle" id="togAfterHours" onclick="toggleBtn(this);updateQuote()"></div>
     </div>
     <div class="toggle-row">
@@ -248,7 +228,7 @@
       <div class="toggle" id="togTravel" onclick="toggleBtn(this);updateQuote()"></div>
     </div>
     <div class="toggle-row">
-      <span>Rush Fee (+$35)</span>
+      <span>Rush Fee (+$15)</span>
       <div class="toggle" id="togRush" onclick="toggleBtn(this);updateQuote()"></div>
     </div>
     <div class="toggle-row">
@@ -266,7 +246,6 @@
   <div class="select-hint">Tap the service you want to quote</div>
   <div id="results"></div>
 
-  <!-- EMAIL SECTION -->
   <div class="email-section" id="emailSection">
     <div class="card">
       <div class="card-title">Send Quote to Customer</div>
@@ -319,113 +298,141 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-// ===== VEHICLE DATABASE =====
-const makes = {
-  'Chevrolet': 'domestic', 'Ford': 'domestic', 'GMC': 'domestic', 'Dodge': 'domestic',
-  'Chrysler': 'domestic', 'Jeep': 'domestic', 'Ram': 'domestic', 'Buick': 'domestic',
-  'Cadillac': 'domestic', 'Lincoln': 'domestic',
+// ===== MAKE DATABASE (from Rules sheet) =====
+const makeGroups = {
+  'Ford': 'domestic', 'Chevrolet': 'domestic', 'Chevy': 'domestic', 'GMC': 'domestic',
+  'Dodge': 'domestic', 'Chrysler': 'domestic', 'Jeep': 'domestic', 'Ram': 'domestic',
+  'Buick': 'domestic', 'Cadillac': 'domestic', 'Lincoln': 'domestic',
   'Toyota': 'asian', 'Honda': 'asian', 'Nissan': 'asian', 'Hyundai': 'asian',
   'Kia': 'asian', 'Mazda': 'asian', 'Subaru': 'asian', 'Mitsubishi': 'asian',
-  'Lexus': 'asian_premium', 'Acura': 'asian_premium', 'Infiniti': 'asian_premium',
-  'Volkswagen': 'euro', 'BMW': 'euro_premium', 'Mercedes-Benz': 'euro_premium',
-  'Audi': 'euro_premium', 'Volvo': 'euro', 'Mini': 'euro',
-  'Tesla': 'electric', 'Other': 'domestic'
+  'Lexus': 'asian', 'Acura': 'asian', 'Infiniti': 'asian',
+  'Volkswagen': 'asian', 'BMW': 'asian', 'Mercedes-Benz': 'asian',
+  'Audi': 'asian', 'Volvo': 'asian', 'Mini': 'asian',
+  'Tesla': 'asian', 'Other': 'domestic'
 };
 
-function inferSystem(make, year) {
-  const group = makes[make] || 'domestic';
+// ===== SYSTEM INFERENCE (from Rules sheet) =====
+// Up to 2006 = Basic, 2007-2015 = Transponder, 2016-2019 = Remote, 2020+ = Smart
+function inferSystem(year) {
   const y = parseInt(year);
-  if (group === 'electric') return 'smart';
-  if (group === 'euro_premium' && y >= 2005) return 'smart';
-  if (group === 'asian_premium' && y >= 2010) return 'smart';
-  if ((group === 'asian' || group === 'domestic') && y >= 2020) return 'smart';
-  if (group === 'euro_premium' && y >= 2000) return 'remote';
-  if (group === 'asian_premium' && y >= 2005) return 'remote';
-  if ((group === 'domestic' || group === 'asian') && y >= 2010) return 'remote';
-  if (group === 'euro' && y >= 2008) return 'remote';
-  if (y >= 1998) return 'transponder';
-  return 'basic';
+  if (y <= 2006) return 'basic';
+  if (y <= 2015) return 'transponder';
+  if (y <= 2019) return 'remote';
+  return 'smart';
 }
 
-function getDifficultyTier(make, year) {
-  const sys = getSystem(make, year);
-  if (sys === 'basic') return { tier: 1, label: 'Tier 1 - Easy', cls: 'tier1' };
-  if (sys === 'transponder') return { tier: 2, label: 'Tier 2 - Standard', cls: 'tier2' };
-  if (sys === 'remote') return { tier: 3, label: 'Tier 3 - Moderate', cls: 'tier3' };
-  return { tier: 4, label: 'Tier 4 - Advanced', cls: 'tier4' };
-}
-
-function getSystem(make, year) {
+function getSystem(year) {
   const override = document.getElementById('systemOverride').value;
   if (override !== 'auto') return override;
-  return inferSystem(make, year);
+  return inferSystem(year);
 }
 
-// ===== PRICING =====
-function getPricing(make, year) {
-  const sys = getSystem(make, year);
-  const group = makes[make] || 'domestic';
-  const tier = getDifficultyTier(make, year);
-  const isPremium = group.includes('premium') || group === 'electric';
-
-  const pricing = {
-    basic: {
-      lockout: 65, trunk: 65, spareBasic: 35,
-      transponderProgram: null, transponderSupply: null,
-      remoteProgram: null, remoteSupply: null,
-      smartProgram: null, smartSupply: null,
-      allKeysLost: 165, ignition: 165
-    },
-    transponder: {
-      lockout: 65, trunk: 65, spareBasic: 35,
-      transponderProgram: 85, transponderSupply: 125,
-      remoteProgram: null, remoteSupply: null,
-      smartProgram: null, smartSupply: null,
-      allKeysLost: 195, ignition: 185
-    },
-    remote: {
-      lockout: 65, trunk: 65, spareBasic: null,
-      transponderProgram: null, transponderSupply: null,
-      remoteProgram: 75, remoteSupply: 175,
-      smartProgram: null, smartSupply: null,
-      allKeysLost: 225, ignition: 195
-    },
-    smart: {
-      lockout: 75, trunk: 75, spareBasic: null,
-      transponderProgram: null, transponderSupply: null,
-      remoteProgram: null, remoteSupply: null,
-      smartProgram: 95, smartSupply: 275,
-      allKeysLost: 295, ignition: 225
-    }
-  };
-
-  let p = { ...pricing[sys] };
-  if (isPremium) {
-    Object.keys(p).forEach(k => { if (p[k] !== null) p[k] = Math.round(p[k] * 1.15); });
-  }
-  if (parseInt(year) >= 2022) {
-    Object.keys(p).forEach(k => { if (p[k] !== null && p[k] >= 100) p[k] += 15; });
-  }
-  return { prices: p, system: sys, tier };
+function getTier(system) {
+  if (system === 'basic') return { label: 'Tier 1 - Easy', cls: 'tier1' };
+  if (system === 'transponder') return { label: 'Tier 2 - Standard', cls: 'tier2' };
+  if (system === 'remote') return { label: 'Tier 2 - Standard', cls: 'tier2' };
+  return { label: 'Tier 3 - Advanced', cls: 'tier4' };
 }
+
+// ===== MASTER PRICES (exact from Master Prices sheet) =====
+// { code: [domestic_base, asian_base, buffer, appliesTo] }
+const masterPrices = {
+  LOCKOUT:      { domestic: 65,  asian: 65,  buffer: 0,  system: 'all',         name: 'Vehicle lockout / entry' },
+  TRUNK:        { domestic: 65,  asian: 65,  buffer: 0,  system: 'all',         name: 'Trunk unlock' },
+  BASIC_DUP:    { domestic: 35,  asian: 35,  buffer: 10, system: 'basic',       name: 'Spare basic metal key (supply + cut)' },
+  TRANS_PROG:   { domestic: 85,  asian: 95,  buffer: 15, system: 'transponder', name: 'Program customer-supplied transponder key' },
+  TRANS_NEW:    { domestic: 145, asian: 155, buffer: 20, system: 'transponder', name: 'Spare transponder key supplied + cut + program' },
+  REMOTE_PROG:  { domestic: 95,  asian: 105, buffer: 20, system: 'remote',      name: 'Program customer-supplied remote / fob' },
+  REMOTE_NEW:   { domestic: 165, asian: 175, buffer: 25, system: 'remote',      name: 'New remote head / fob supplied + cut + program' },
+  SMART_PROG:   { domestic: 145, asian: 155, buffer: 25, system: 'smart',       name: 'Program customer-supplied smart key' },
+  SMART_NEW:    { domestic: 275, asian: 285, buffer: 35, system: 'smart',       name: 'New smart key supplied + program' },
+  AKL_BASIC:    { domestic: 165, asian: 175, buffer: 25, system: 'basic',       name: 'All keys lost' },
+  AKL_TRANS:    { domestic: 235, asian: 245, buffer: 30, system: 'transponder', name: 'All keys lost' },
+  AKL_REMOTE:   { domestic: 275, asian: 290, buffer: 35, system: 'remote',      name: 'All keys lost' },
+  AKL_SMART:    { domestic: 375, asian: 395, buffer: 45, system: 'smart',       name: 'All keys lost' },
+  IGN_BASIC:    { domestic: 165, asian: 175, buffer: 25, system: 'basic',       name: 'Ignition repair / key won\'t turn' },
+  IGN_TRANS:    { domestic: 205, asian: 215, buffer: 30, system: 'transponder', name: 'Ignition repair / key won\'t turn' },
+  IGN_REMOTE:   { domestic: 225, asian: 235, buffer: 30, system: 'remote',      name: 'Ignition repair / key won\'t turn' },
+  IGN_SMART:    { domestic: 275, asian: 290, buffer: 40, system: 'smart',       name: 'Ignition repair / key won\'t turn' },
+};
+
+// Add-on defaults (from Rules sheet)
+const ADDON_AFTERHOURS = 40;
+const ADDON_TRAVEL = 25;
+const ADDON_RUSH = 15;
+const ADDON_REFERRAL = -10;
+const LOCKOUT_YEAR_PREMIUM_START = 2022;
+const LOCKOUT_YEAR_PREMIUM_ADD = 10;
 
 function getAddons() {
   let total = 0;
-  if (document.getElementById('togAfterHours').classList.contains('active')) total += 35;
-  if (document.getElementById('togTravel').classList.contains('active')) total += 25;
-  if (document.getElementById('togRush').classList.contains('active')) total += 35;
-  if (document.getElementById('togReferral').classList.contains('active')) total -= 10;
+  if (document.getElementById('togAfterHours').classList.contains('active')) total += ADDON_AFTERHOURS;
+  if (document.getElementById('togTravel').classList.contains('active')) total += ADDON_TRAVEL;
+  if (document.getElementById('togRush').classList.contains('active')) total += ADDON_RUSH;
+  if (document.getElementById('togReferral').classList.contains('active')) total += ADDON_REFERRAL;
   return total;
+}
+
+// ===== BUILD SERVICES LIST =====
+function getServices(make, year) {
+  const system = getSystem(year);
+  const group = makeGroups[make] || 'domestic';
+  const y = parseInt(year);
+  const addons = getAddons();
+
+  // Which service codes apply to this system
+  const serviceCodes = [];
+
+  // Lockout & trunk always apply
+  serviceCodes.push('LOCKOUT', 'TRUNK');
+
+  // System-specific services
+  if (system === 'basic') {
+    serviceCodes.push('BASIC_DUP', 'AKL_BASIC', 'IGN_BASIC');
+  } else if (system === 'transponder') {
+    serviceCodes.push('TRANS_PROG', 'TRANS_NEW', 'AKL_TRANS', 'IGN_TRANS');
+  } else if (system === 'remote') {
+    serviceCodes.push('REMOTE_PROG', 'REMOTE_NEW', 'AKL_REMOTE', 'IGN_REMOTE');
+  } else if (system === 'smart') {
+    serviceCodes.push('SMART_PROG', 'SMART_NEW', 'AKL_SMART', 'IGN_SMART');
+  }
+
+  const services = [];
+  serviceCodes.forEach(code => {
+    const mp = masterPrices[code];
+    let base = group === 'asian' ? mp.asian : mp.domestic;
+
+    // Lockout/Trunk year premium
+    if ((code === 'LOCKOUT' || code === 'TRUNK') && y >= LOCKOUT_YEAR_PREMIUM_START) {
+      base += LOCKOUT_YEAR_PREMIUM_ADD;
+    }
+
+    const total = base + addons;
+    const low = total - mp.buffer;
+    const high = total + mp.buffer;
+
+    services.push({
+      code: code,
+      name: mp.name,
+      base: base,
+      total: total,
+      low: low,
+      high: high,
+      buffer: mp.buffer
+    });
+  });
+
+  return services;
 }
 
 // ===== UI =====
 function toggleBtn(el) { el.classList.toggle('active'); }
 
 const systemLabels = {
-  basic: 'Basic / Metal Key',
-  transponder: 'Transponder (Chip)',
-  remote: 'Remote / Fob',
-  smart: 'Smart / Push-Start'
+  basic: 'Basic / Early Chip',
+  transponder: 'Transponder',
+  remote: 'Remote Head / Smart Mix',
+  smart: 'Smart / Push Start'
 };
 
 let selectedServiceIndex = -1;
@@ -433,11 +440,9 @@ let currentServices = [];
 
 function selectService(idx) {
   selectedServiceIndex = idx;
-  // Update visual selection
-  document.querySelectorAll('.service-card').forEach((card, i) => {
+  document.querySelectorAll('.service-card').forEach(card => {
     card.classList.toggle('selected', parseInt(card.dataset.idx) === idx);
   });
-  // Enable email button
   const btn = document.getElementById('btnEmail');
   btn.disabled = false;
   btn.textContent = 'Send Quote via Email';
@@ -449,57 +454,41 @@ function updateQuote() {
   const year = document.getElementById('year').value;
   if (!make || !year) return;
 
-  const { prices, system, tier } = getPricing(make, year);
+  const system = getSystem(year);
+  const tier = getTier(system);
+  const group = makeGroups[make] || 'domestic';
   const addons = getAddons();
 
-  // Profile
   document.getElementById('profileContent').innerHTML = `
     <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
       <span class="system-badge ${tier.cls}">${systemLabels[system]}</span>
       <span class="system-badge ${tier.cls}">${tier.label}</span>
     </div>
     <p style="margin-top:10px;font-size:13px;color:var(--text-light);">
-      ${make} ${year} &middot; ${makes[make].replace('_', ' ')}
+      ${make} ${year} &middot; ${group === 'asian' ? 'Asian Mainstream' : 'Domestic Mainstream'}
       ${addons !== 0 ? ` &middot; Add-ons: ${addons > 0 ? '+' : ''}$${addons}` : ''}
     </p>
   `;
 
-  currentServices = [
-    { name: 'Vehicle Lockout / Entry', price: prices.lockout },
-    { name: 'Trunk Unlock', price: prices.trunk },
-    { name: 'Spare Basic Metal Key', price: prices.spareBasic },
-    { name: 'Program Customer Transponder', price: prices.transponderProgram },
-    { name: 'Transponder Key (supply + cut + program)', price: prices.transponderSupply },
-    { name: 'Program Customer Remote / Fob', price: prices.remoteProgram },
-    { name: 'Remote Head Key (supply + cut + program)', price: prices.remoteSupply },
-    { name: 'Program Customer Smart Key', price: prices.smartProgram },
-    { name: 'Smart Key (supply + program)', price: prices.smartSupply },
-    { name: 'All Keys Lost', price: prices.allKeysLost },
-    { name: 'Ignition Repair / Key Won\'t Turn', price: prices.ignition },
-  ];
+  currentServices = getServices(make, year);
 
-  // Check if previously selected service is still valid
-  if (selectedServiceIndex >= 0 && currentServices[selectedServiceIndex].price === null) {
+  // Reset selection if needed
+  if (selectedServiceIndex >= currentServices.length) {
     selectedServiceIndex = -1;
   }
 
   let html = '';
   currentServices.forEach((s, i) => {
-    const applicable = s.price !== null;
-    const total = applicable ? s.price + addons : null;
-    const low = applicable ? Math.round(total * 0.85) : null;
-    const high = applicable ? Math.round(total * 1.15) : null;
     const isSelected = i === selectedServiceIndex;
-
     html += `
-      <div class="service-card ${applicable ? '' : 'dimmed'} ${isSelected ? 'selected' : ''}"
+      <div class="service-card ${isSelected ? 'selected' : ''}"
            data-idx="${i}" onclick="selectService(${i})">
         <div class="service-row">
           <div class="service-check"></div>
           <div class="service-name">${s.name}</div>
           <div style="text-align:right;">
-            <div class="service-price">$${total}</div>
-            <div class="service-range">$${low} - $${high}</div>
+            <div class="service-price">$${s.total}</div>
+            ${s.buffer > 0 ? `<div class="service-range">$${s.low} - $${s.high}</div>` : ''}
           </div>
         </div>
       </div>
@@ -508,7 +497,6 @@ function updateQuote() {
 
   document.getElementById('results').innerHTML = html;
 
-  // Update email button state
   if (selectedServiceIndex < 0) {
     document.getElementById('btnEmail').disabled = true;
     document.getElementById('btnEmail').textContent = 'Select a service above';
@@ -518,24 +506,22 @@ function updateQuote() {
 // ===== EMAIL =====
 function sendEmail() {
   const email = document.getElementById('customerEmail').value.trim();
-  if (!email) {
-    document.getElementById('customerEmail').focus();
-    return;
-  }
+  if (!email) { document.getElementById('customerEmail').focus(); return; }
   if (selectedServiceIndex < 0) return;
 
   const name = document.getElementById('customerName').value.trim() || 'Valued Customer';
   const make = document.getElementById('make').value;
   const year = document.getElementById('year').value;
-  const system = getSystem(make, year);
-  const addons = getAddons();
+  const system = getSystem(year);
   const service = currentServices[selectedServiceIndex];
-  const total = service.price + addons;
-  const low = Math.round(total * 0.85);
-  const high = Math.round(total * 1.15);
   const today = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 
   const subject = `Car Key Rescue - Quote for ${year} ${make}`;
+
+  let priceLine = `  Estimated Price: $${service.total}`;
+  if (service.buffer > 0) {
+    priceLine += `\n  Price Range: $${service.low} - $${service.high}`;
+  }
 
   const body = `Hi ${name},
 
@@ -547,9 +533,8 @@ VEHICLE
 
 SERVICE
   ${service.name}
-  Estimated Price: $${total}
-  Price Range: $${low} - $${high}
-${addons !== 0 ? `  (Includes add-ons: ${addons > 0 ? '+' : ''}$${addons})\n` : ''}
+${priceLine}
+
 * Final price may vary depending on vehicle condition.
 
 Ready to schedule? Call or text us anytime.
@@ -567,12 +552,15 @@ Serving Central Florida`;
 function initApp() {
   const makeSel = document.getElementById('make');
   if (makeSel.options.length > 0) return;
-  Object.keys(makes).sort().forEach(m => {
+
+  // Only show unique display names (skip "Chevy" alias)
+  const displayMakes = Object.keys(makeGroups).filter(m => m !== 'Chevy').sort();
+  displayMakes.forEach(m => {
     const opt = document.createElement('option');
     opt.value = m; opt.textContent = m;
     makeSel.appendChild(opt);
   });
-  makeSel.value = 'Dodge';
+  makeSel.value = 'Ford';
 
   const yearSel = document.getElementById('year');
   for (let y = 2026; y >= 1990; y--) {
