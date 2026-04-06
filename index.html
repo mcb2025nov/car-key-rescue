@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Car Key Rescue">
+<title>Car Key Rescue - Quote Estimator</title>
+<style>
+  :root {
+    --primary: #1a73e8;
+    --primary-dark: #1557b0;
+    --bg: #f5f7fa;
+    --card: #ffffff;
+    --text: #1a1a2e;
+    --text-light: #6b7280;
+    --border: #e5e7eb;
+    --green: #10b981;
+    --orange: #f59e0b;
+    --red: #ef4444;
+    --radius: 14px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro', 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding-bottom: env(safe-area-inset-bottom, 20px);
+  }
+  .header {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    color: white;
+    padding: 20px 16px 24px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .header h1 {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+  }
+  .header p {
+    font-size: 13px;
+    opacity: 0.7;
+    margin-top: 4px;
+  }
+  .container { padding: 16px; max-width: 500px; margin: 0 auto; }
+
+  .card {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 16px;
+    margin-bottom: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  .card-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+  }
+
+  .form-group { margin-bottom: 14px; }
+  .form-group:last-child { margin-bottom: 0; }
+  label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: var(--text);
+  }
+  select, input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    font-size: 16px;
+    background: white;
+    color: var(--text);
+    appearance: none;
+    -webkit-appearance: none;
+  }
+  select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236b7280' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+  }
+  select:focus, input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(26,115,232,0.15);
+  }
+
+  .toggle-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .toggle-row:last-child { border-bottom: none; }
+  .toggle-row span { font-size: 14px; }
+  .toggle {
+    width: 48px; height: 28px;
+    background: #d1d5db;
+    border-radius: 14px;
+    position: relative;
+    cursor: pointer;
+    transition: background 0.2s;
+    flex-shrink: 0;
+  }
+  .toggle.active { background: var(--primary); }
+  .toggle::after {
+    content: '';
+    width: 22px; height: 22px;
+    background: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 3px; left: 3px;
+    transition: transform 0.2s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  }
+  .toggle.active::after { transform: translateX(20px); }
+
+  .system-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 4px;
+  }
+  .system-badge.tier1 { background: #d1fae5; color: #065f46; }
+  .system-badge.tier2 { background: #dbeafe; color: #1e40af; }
+  .system-badge.tier3 { background: #fef3c7; color: #92400e; }
+  .system-badge.tier4 { background: #fee2e2; color: #991b1b; }
+
+  .service-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    margin-bottom: 10px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  .service-card.dimmed { opacity: 0.4; }
+  .service-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    gap: 12px;
+  }
+  .service-name {
+    font-size: 14px;
+    font-weight: 500;
+    flex: 1;
+  }
+  .service-price {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--primary);
+    white-space: nowrap;
+  }
+  .service-range {
+    font-size: 12px;
+    color: var(--text-light);
+    text-align: right;
+  }
+  .service-note {
+    padding: 0 16px 12px;
+    font-size: 12px;
+    color: var(--text-light);
+    line-height: 1.4;
+  }
+  .na-label {
+    font-size: 13px;
+    color: var(--text-light);
+    font-style: italic;
+  }
+
+  .btn-quote {
+    width: 100%;
+    padding: 16px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 4px;
+    transition: background 0.2s;
+  }
+  .btn-quote:active { background: var(--primary-dark); }
+
+  .footer {
+    text-align: center;
+    padding: 20px 16px;
+    font-size: 12px;
+    color: var(--text-light);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f1117;
+      --card: #1a1d28;
+      --text: #e5e7eb;
+      --text-light: #9ca3af;
+      --border: #2d3142;
+    }
+    select, input { background: #1a1d28; color: #e5e7eb; border-color: var(--border); }
+    .header { background: linear-gradient(135deg, #0f1117 0%, #1a1d28 100%); }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Car Key Rescue</h1>
+  <p>Vehicle Quote Estimator</p>
+</div>
+
+<div class="container">
+
+  <!-- VEHICLE INPUT -->
+  <div class="card">
+    <div class="card-title">Vehicle Info</div>
+    <div class="form-group">
+      <label>Make</label>
+      <select id="make"></select>
+    </div>
+    <div class="form-group">
+      <label>Year</label>
+      <select id="year"></select>
+    </div>
+    <div class="form-group">
+      <label>System Override</label>
+      <select id="systemOverride">
+        <option value="auto">Auto (detect from make/year)</option>
+        <option value="basic">Basic / Metal Key Only</option>
+        <option value="transponder">Transponder (Chip Key)</option>
+        <option value="remote">Remote / Fob</option>
+        <option value="smart">Smart / Push-Start</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- ADD-ONS -->
+  <div class="card">
+    <div class="card-title">Add-ons</div>
+    <div class="toggle-row">
+      <span>After-hours</span>
+      <div class="toggle" id="togAfterHours" onclick="toggleBtn(this)"></div>
+    </div>
+    <div class="toggle-row">
+      <span>Travel Fee (+$25)</span>
+      <div class="toggle" id="togTravel" onclick="toggleBtn(this)"></div>
+    </div>
+    <div class="toggle-row">
+      <span>Rush Fee (+$35)</span>
+      <div class="toggle" id="togRush" onclick="toggleBtn(this)"></div>
+    </div>
+    <div class="toggle-row">
+      <span>Referral Discount (-$10)</span>
+      <div class="toggle" id="togReferral" onclick="toggleBtn(this)"></div>
+    </div>
+  </div>
+
+  <!-- DETECTED SYSTEM -->
+  <div class="card" id="profileCard">
+    <div class="card-title">Vehicle Profile</div>
+    <div id="profileContent"></div>
+  </div>
+
+  <!-- GENERATE -->
+  <button class="btn-quote" onclick="generateQuote()">Generate Quote</button>
+
+  <!-- RESULTS -->
+  <div id="results" style="margin-top: 16px;"></div>
+
+  <div class="footer">
+    Car Key Rescue &copy; 2026<br>
+    Prices are estimates only
+  </div>
+</div>
+
+<script>
+// ===== VEHICLE DATABASE =====
+const makes = {
+  // Domestic Mainstream
+  'Chevrolet': 'domestic', 'Ford': 'domestic', 'GMC': 'domestic', 'Dodge': 'domestic',
+  'Chrysler': 'domestic', 'Jeep': 'domestic', 'Ram': 'domestic', 'Buick': 'domestic',
+  'Cadillac': 'domestic', 'Lincoln': 'domestic',
+  // Asian Mainstream
+  'Toyota': 'asian', 'Honda': 'asian', 'Nissan': 'asian', 'Hyundai': 'asian',
+  'Kia': 'asian', 'Mazda': 'asian', 'Subaru': 'asian', 'Mitsubishi': 'asian',
+  // Asian Premium
+  'Lexus': 'asian_premium', 'Acura': 'asian_premium', 'Infiniti': 'asian_premium',
+  // European
+  'Volkswagen': 'euro', 'BMW': 'euro_premium', 'Mercedes-Benz': 'euro_premium',
+  'Audi': 'euro_premium', 'Volvo': 'euro', 'Mini': 'euro',
+  // Other
+  'Tesla': 'electric', 'Other': 'domestic'
+};
+
+// Infer key system from make group + year
+function inferSystem(make, year) {
+  const group = makes[make] || 'domestic';
+  const y = parseInt(year);
+
+  if (group === 'electric') return 'smart';
+
+  // Smart / push-start era
+  if (group === 'euro_premium' && y >= 2005) return 'smart';
+  if (group === 'asian_premium' && y >= 2010) return 'smart';
+  if ((group === 'asian' || group === 'domestic') && y >= 2020) return 'smart';
+
+  // Remote / fob era
+  if (group === 'euro_premium' && y >= 2000) return 'remote';
+  if (group === 'asian_premium' && y >= 2005) return 'remote';
+  if ((group === 'domestic' || group === 'asian') && y >= 2010) return 'remote';
+  if (group === 'euro' && y >= 2008) return 'remote';
+
+  // Transponder era
+  if (y >= 1998) return 'transponder';
+
+  // Basic
+  return 'basic';
+}
+
+function getDifficultyTier(make, year) {
+  const group = makes[make] || 'domestic';
+  const sys = getSystem(make, year);
+  if (sys === 'basic') return { tier: 1, label: 'Tier 1 - Easy', cls: 'tier1' };
+  if (sys === 'transponder') return { tier: 2, label: 'Tier 2 - Standard', cls: 'tier2' };
+  if (sys === 'remote') return { tier: 3, label: 'Tier 3 - Moderate', cls: 'tier3' };
+  return { tier: 4, label: 'Tier 4 - Advanced', cls: 'tier4' };
+}
+
+function getSystem(make, year) {
+  const override = document.getElementById('systemOverride').value;
+  if (override !== 'auto') return override;
+  return inferSystem(make, year);
+}
+
+// ===== PRICING ENGINE =====
+function getPricing(make, year) {
+  const sys = getSystem(make, year);
+  const group = makes[make] || 'domestic';
+  const tier = getDifficultyTier(make, year);
+  const isPremium = group.includes('premium') || group === 'electric';
+
+  // Base prices by system type
+  const pricing = {
+    basic: {
+      lockout: 65, trunk: 65,
+      spareBasic: 35,
+      transponderProgram: null, transponderSupply: null,
+      remoteProgram: null, remoteSupply: null,
+      smartProgram: null, smartSupply: null,
+      allKeysLost: 165, ignition: 165
+    },
+    transponder: {
+      lockout: 65, trunk: 65,
+      spareBasic: 35,
+      transponderProgram: 85, transponderSupply: 125,
+      remoteProgram: null, remoteSupply: null,
+      smartProgram: null, smartSupply: null,
+      allKeysLost: 195, ignition: 185
+    },
+    remote: {
+      lockout: 65, trunk: 65,
+      spareBasic: null,
+      transponderProgram: null, transponderSupply: null,
+      remoteProgram: 75, remoteSupply: 175,
+      smartProgram: null, smartSupply: null,
+      allKeysLost: 225, ignition: 195
+    },
+    smart: {
+      lockout: 75, trunk: 75,
+      spareBasic: null,
+      transponderProgram: null, transponderSupply: null,
+      remoteProgram: null, remoteSupply: null,
+      smartProgram: 95, smartSupply: 275,
+      allKeysLost: 295, ignition: 225
+    }
+  };
+
+  let p = { ...pricing[sys] };
+
+  // Premium brand markup
+  if (isPremium) {
+    Object.keys(p).forEach(k => {
+      if (p[k] !== null) p[k] = Math.round(p[k] * 1.15);
+    });
+  }
+
+  // Year-based small adjustment for very new vehicles (2022+)
+  const y = parseInt(year);
+  if (y >= 2022) {
+    Object.keys(p).forEach(k => {
+      if (p[k] !== null && p[k] >= 100) p[k] += 15;
+    });
+  }
+
+  return { prices: p, system: sys, tier };
+}
+
+function getAddons() {
+  let total = 0;
+  if (document.getElementById('togAfterHours').classList.contains('active')) total += 35;
+  if (document.getElementById('togTravel').classList.contains('active')) total += 25;
+  if (document.getElementById('togRush').classList.contains('active')) total += 35;
+  if (document.getElementById('togReferral').classList.contains('active')) total -= 10;
+  return total;
+}
+
+// ===== UI =====
+function toggleBtn(el) {
+  el.classList.toggle('active');
+}
+
+function populateMakes() {
+  const sel = document.getElementById('make');
+  Object.keys(makes).sort().forEach(m => {
+    const opt = document.createElement('option');
+    opt.value = m; opt.textContent = m;
+    sel.appendChild(opt);
+  });
+  sel.value = 'Dodge';
+}
+
+function populateYears() {
+  const sel = document.getElementById('year');
+  for (let y = 2026; y >= 1990; y--) {
+    const opt = document.createElement('option');
+    opt.value = y; opt.textContent = y;
+    sel.appendChild(opt);
+  }
+  sel.value = '2020';
+}
+
+const systemLabels = {
+  basic: 'Basic / Metal Key',
+  transponder: 'Transponder (Chip)',
+  remote: 'Remote / Fob',
+  smart: 'Smart / Push-Start'
+};
+
+function generateQuote() {
+  const make = document.getElementById('make').value;
+  const year = document.getElementById('year').value;
+  const { prices, system, tier } = getPricing(make, year);
+  const addons = getAddons();
+
+  // Update profile
+  document.getElementById('profileContent').innerHTML = `
+    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+      <span class="system-badge ${tier.cls}">${systemLabels[system]}</span>
+      <span class="system-badge ${tier.cls}">${tier.label}</span>
+    </div>
+    <p style="margin-top:10px;font-size:13px;color:var(--text-light);">
+      ${make} ${year} &middot; ${makes[make].replace('_', ' ')}
+      ${addons !== 0 ? ` &middot; Add-ons: ${addons > 0 ? '+' : ''}$${addons}` : ''}
+    </p>
+  `;
+
+  // Build services
+  const services = [
+    { name: 'Vehicle Lockout / Entry', price: prices.lockout, note: 'Standard vehicle entry service', always: true },
+    { name: 'Trunk Unlock', price: prices.trunk, note: 'Trunk-only unlock service', always: true },
+    { name: 'Spare Basic Metal Key', price: prices.spareBasic, note: 'Supply + cut a basic metal key', always: false },
+    { name: 'Program Customer Transponder', price: prices.transponderProgram, note: 'Customer already has the key', always: false },
+    { name: 'Transponder Key (supply + cut + program)', price: prices.transponderSupply, note: 'We supply the chip key', always: false },
+    { name: 'Program Customer Remote / Fob', price: prices.remoteProgram, note: 'Customer already has the remote', always: false },
+    { name: 'Remote Head Key (supply + cut + program)', price: prices.remoteSupply, note: 'We supply the remote key', always: false },
+    { name: 'Program Customer Smart Key', price: prices.smartProgram, note: 'Customer already has smart key', always: false },
+    { name: 'Smart Key (supply + program)', price: prices.smartSupply, note: 'We supply the smart key/fob', always: false },
+    { name: 'All Keys Lost', price: prices.allKeysLost, note: 'Most common quote for this vehicle', always: true },
+    { name: 'Ignition Repair / Key Won\'t Turn', price: prices.ignition, note: 'For ignition-related issues only', always: true },
+  ];
+
+  let html = '';
+  services.forEach(s => {
+    const applicable = s.price !== null;
+    const total = applicable ? s.price + addons : null;
+    const low = applicable ? Math.round(total * 0.85) : null;
+    const high = applicable ? Math.round(total * 1.15) : null;
+
+    html += `
+      <div class="service-card ${applicable ? '' : 'dimmed'}">
+        <div class="service-row">
+          <div class="service-name">${s.name}</div>
+          ${applicable
+            ? `<div style="text-align:right;">
+                <div class="service-price">$${total}</div>
+                <div class="service-range">$${low} - $${high}</div>
+              </div>`
+            : `<div class="na-label">N/A</div>`
+          }
+        </div>
+        <div class="service-note">${s.note}</div>
+      </div>
+    `;
+  });
+
+  document.getElementById('results').innerHTML = html;
+  document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// Init
+populateMakes();
+populateYears();
+generateQuote();
+</script>
+</body>
+</html>
