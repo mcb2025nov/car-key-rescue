@@ -250,14 +250,14 @@
     <div class="card">
       <div class="card-title">Send Quote to Customer</div>
       <div class="form-group">
-        <label>Customer Email</label>
-        <input type="email" id="customerEmail" placeholder="customer@email.com">
+        <label>Customer Phone (optional)</label>
+        <input type="tel" id="customerPhone" placeholder="(321) 555-1234">
       </div>
       <div class="form-group">
         <label>Customer Name (optional)</label>
         <input type="text" id="customerName" placeholder="John">
       </div>
-      <button class="btn-email" id="btnEmail" onclick="sendEmail()" disabled>Select a service above</button>
+      <button class="btn-email" id="btnEmail" onclick="sendSMS()" disabled>Select a service above</button>
     </div>
   </div>
 
@@ -445,7 +445,7 @@ function selectService(idx) {
   });
   const btn = document.getElementById('btnEmail');
   btn.disabled = false;
-  btn.textContent = 'Send Quote via Email';
+  btn.textContent = 'Send Quote via Text Message';
   document.getElementById('emailSection').style.display = 'block';
 }
 
@@ -503,49 +503,33 @@ function updateQuote() {
   }
 }
 
-// ===== EMAIL =====
-function sendEmail() {
-  const email = document.getElementById('customerEmail').value.trim();
-  if (!email) { document.getElementById('customerEmail').focus(); return; }
+// ===== SMS =====
+function sendSMS() {
   if (selectedServiceIndex < 0) return;
 
-  const name = document.getElementById('customerName').value.trim() || 'Valued Customer';
+  const phoneRaw = document.getElementById('customerPhone').value.trim();
+  const phone = phoneRaw.replace(/[^0-9+]/g, '');
+  const name = document.getElementById('customerName').value.trim();
+  const greeting = name ? `Hi ${name}` : 'Hi';
   const make = document.getElementById('make').value;
   const year = document.getElementById('year').value;
-  const system = getSystem(year);
   const service = currentServices[selectedServiceIndex];
-  const today = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 
-  const subject = `Car Key Rescue - Quote for ${year} ${make}`;
-
-  let priceLine = `  Estimated Price: $${service.total}`;
+  let priceLine = `$${service.total}`;
   if (service.buffer > 0) {
-    priceLine += `\n  Price Range: $${service.low} - $${service.high}`;
+    priceLine += ` (range $${service.low}-$${service.high})`;
   }
 
-  const body = `Hi ${name},
+  const body = `${greeting}, this is Car Key Rescue. Quote for your ${year} ${make}:
 
-Thank you for contacting Car Key Rescue! Below is your personalized quote.
+${service.name}
+Estimated: ${priceLine}
 
-VEHICLE
-  ${year} ${make}
-  Key System: ${systemLabels[system]}
+Final price may vary based on vehicle condition. Ready to schedule? Reply or call (321) 370-6640.`;
 
-SERVICE
-  ${service.name}
-${priceLine}
-
-* Final price may vary depending on vehicle condition.
-
-Ready to schedule? Call or text us anytime.
-
-Best regards,
-Car Key Rescue
-(321) 370-6640
-Serving Central Florida`;
-
-  const mailtoLink = `mailto:${encodeURIComponent(email)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  window.location.href = mailtoLink;
+  // iOS uses & as separator, Android uses ?. Try iOS first since this is for iPhone.
+  const smsLink = `sms:${phone}&body=${encodeURIComponent(body)}`;
+  window.location.href = smsLink;
 }
 
 // ===== INIT =====
