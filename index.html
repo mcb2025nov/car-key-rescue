@@ -30,13 +30,17 @@
   .login-screen {
     display: flex; flex-direction: column; align-items: center; justify-content: center;
     min-height: 100vh; padding: 24px;
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    background: #000000;
+  }
+  .login-logo {
+    max-width: 260px; width: 80%; height: auto; margin-bottom: 24px;
+    display: block;
   }
   .login-box {
     background: white; border-radius: 20px; padding: 32px 24px; width: 100%;
-    max-width: 340px; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    max-width: 340px; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.5);
   }
-  .login-icon { font-size: 48px; margin-bottom: 12px; }
+  .login-icon { font-size: 48px; margin-bottom: 12px; display: none; }
   .login-box h2 { font-size: 22px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
   .login-box p { font-size: 14px; color: var(--text-light); margin-bottom: 20px; }
   .login-box input {
@@ -54,12 +58,16 @@
 
   .app { display: none; }
   .header {
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-    color: white; padding: 20px 16px 24px; text-align: center;
+    background: #000000;
+    color: white; padding: 18px 16px 20px; text-align: center;
     position: sticky; top: 0; z-index: 10;
   }
-  .header h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.3px; }
-  .header p { font-size: 13px; opacity: 0.7; margin-top: 4px; }
+  .header-logo {
+    max-width: 200px; width: 70%; height: auto; margin: 0 auto;
+    display: block;
+  }
+  .header h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.3px; display: none; }
+  .header p { font-size: 12px; opacity: 0.7; margin-top: 8px; color: #fbbf24; }
   .container { padding: 16px; max-width: 500px; margin: 0 auto; }
 
   .card {
@@ -175,7 +183,7 @@
     padding-bottom: env(safe-area-inset-bottom, 20px);
   }
   .settings-header {
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    background: #000000;
     color: white; padding: 16px; display: flex; align-items: center; gap: 12px;
     position: sticky; top: 0; z-index: 10;
   }
@@ -249,21 +257,21 @@
       --text-light: #9ca3af; --border: #2d3142;
     }
     select, .app input { background: #1a1d28; color: #e5e7eb; border-color: var(--border); }
-    .header { background: linear-gradient(135deg, #0f1117 0%, #1a1d28 100%); }
+    .header { background: #000000; }
     .login-box { background: #1a1d28; }
     .login-box h2 { color: #e5e7eb; }
     .login-box input { background: #0f1117; color: #e5e7eb; border-color: var(--border); }
     .price-row input, .addon-row input { background: #0f1117; color: #e5e7eb; border-color: var(--border); }
-    .settings-header { background: linear-gradient(135deg, #0f1117 0%, #1a1d28 100%); }
+    .settings-header { background: #000000; }
   }
 </style>
 </head>
 <body>
 
 <div class="login-screen" id="loginScreen">
+  <img src="logo.jpg" alt="Car Key Rescue" class="login-logo" onerror="this.style.display='none'">
   <div class="login-box">
-    <div class="login-icon">🔑</div>
-    <h2>Car Key Rescue</h2>
+    <h2>Welcome</h2>
     <p>Enter access code</p>
     <input type="password" id="pinInput" maxlength="4" inputmode="numeric" placeholder="----" autocomplete="off">
     <button class="login-btn" onclick="tryLogin()">Enter</button>
@@ -274,6 +282,7 @@
 <div class="app" id="mainApp">
 
 <div class="header">
+  <img src="logo.jpg" alt="Car Key Rescue" class="header-logo" onerror="this.style.display='none'">
   <h1>Car Key Rescue</h1>
   <p>Vehicle Quote Estimator</p>
 </div>
