@@ -709,8 +709,10 @@ Estimated: ${priceLine}
 
 Final price may vary based on vehicle condition. Ready to schedule? Reply or call (321) 370-6640.`;
 
-  // iOS uses & as separator, Android uses ?. Try iOS first since this is for iPhone.
-  const smsLink = `sms:${phone}&body=${encodeURIComponent(body)}`;
+  // iOS uses & as separator, Android uses ?
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  const separator = isIOS ? '&' : '?';
+  const smsLink = `sms:${phone}${separator}body=${encodeURIComponent(body)}`;
   window.location.href = smsLink;
 }
 
