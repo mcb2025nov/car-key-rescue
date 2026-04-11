@@ -1,10 +1,13 @@
-const CACHE_NAME = 'ckr-v1';
+const CACHE_NAME = 'ckr-v2';
 const ASSETS = [
   './',
   './index.html',
   './logo.jpg',
   './icon-192.png',
   './icon-512.png',
+  './icon-maskable-192.png',
+  './icon-maskable-512.png',
+  './apple-touch-icon.png',
   './manifest.json'
 ];
 
